@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import React from 'react';
 import ErrorComponent from "../../components/ErrorMessage/ErrorMessage";
-import { login } from "../../api/login";
+import { login } from "../../api/auth";
 import { LoginPageStyles } from "@owasp-guidelines-frontend/shared-lib";
 
 const loginSchema = z.object({

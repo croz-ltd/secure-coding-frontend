@@ -3,5 +3,6 @@ import ProductPageStyles from "./lib/page/ProductPage.module.css";
 import HeaderStyles from "./lib/component/Header.module.css";
 import CommentStyles from "./lib/component/Comment.module.css";
 import ProductListStyles from "./lib/page/ProductListPage.module.css";
+import PasswordResetStyles from "./lib/page/PasswordResetPage.module.css";
 
-export { LoginPageStyles, ProductPageStyles, HeaderStyles, CommentStyles, ProductListStyles }
+export { LoginPageStyles, ProductPageStyles, HeaderStyles, CommentStyles, ProductListStyles, PasswordResetStyles }
