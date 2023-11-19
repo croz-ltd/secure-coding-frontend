@@ -4,7 +4,7 @@ export type Product = {
   description: string;
   price: number;
   imageName: string;
-  productComments: Comment[]
+  comments: Comment[]
 };
 
 export type Comment = {
