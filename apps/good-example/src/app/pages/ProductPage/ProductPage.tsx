@@ -47,7 +47,7 @@ const ProductPage = () => {
         <div>
           <h2>Comments</h2>
           {data.comments.map((comment, _index) => (
-            <CommentComponent comment={comment} />
+            <CommentComponent comment={comment} key={comment.id}/>
           ))}
         </div>
       </>

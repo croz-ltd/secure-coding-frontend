@@ -1,0 +1,39 @@
+.productListPageContainer {
+  margin-top: 5rem;
+  padding-left: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.productListCard {
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  max-width: 50rem;
+}
+
+.productListCard:hover {
+  background-color: #cccccc;
+}
+
+.productListImage {
+  width: 8rem;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.productListInfo {
+  flex-grow: 1;
+}
+
+.productListName {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.productListPriceAndSeller {
+  font-size: 1rem;
+  margin: 0;
+}

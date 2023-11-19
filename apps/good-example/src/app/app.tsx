@@ -1,8 +1,9 @@
-import {Route, Routes, Link} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import ProductPage from "./pages/ProductPage/ProductPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import {HeaderStyles} from "@owasp-guidelines-frontend/shared-lib";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {ProductListPage} from "./pages/ProductListPage/ProductListPage";
 
 const queryClient = new QueryClient();
 
@@ -20,12 +21,8 @@ export function App() {
           element={<LoginPage/>}
         />
         <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
+          path="/home"
+          element={<ProductListPage />}
         />
       </Routes>
     </QueryClientProvider>
