@@ -12,5 +12,6 @@
 body {
   margin: 0;
   padding: 0;
-  --primary-color: #af4c4c
+  --primary-color: #af4c4c;
+  --primary-color-dark: #863a3a;
 }
