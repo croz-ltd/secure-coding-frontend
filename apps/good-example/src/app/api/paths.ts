@@ -1,4 +1,4 @@
-const BACKEND_PATH = "http://owasp-guidelines-good.com:8080/good-example";
+const BACKEND_PATH = "http://owasp-guidelines-good.com/good-example";
 
 export const api = {
   login: `${BACKEND_PATH}/auth/login`,
