@@ -1,19 +1,23 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import {Route, Routes, Link} from 'react-router-dom';
 import ProductPage from "./pages/ProductPage/ProductPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import {HeaderStyles} from "@owasp-guidelines-frontend/shared-lib";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 export function App() {
   return (
-    <>
-      <header className="header">WebShop</header>
+    <QueryClientProvider client={queryClient}>
+      <header className={HeaderStyles.header}>WebShop</header>
       <Routes>
         <Route
-          path="/"
-          element={<ProductPage />}
+          path="/product/:id"
+          element={<ProductPage/>}
         />
         <Route
           path="/login"
-          element={<LoginPage />}
+          element={<LoginPage/>}
         />
         <Route
           path="/page-2"
@@ -24,7 +28,7 @@ export function App() {
           }
         />
       </Routes>
-    </>
+    </QueryClientProvider>
   );
 }
 

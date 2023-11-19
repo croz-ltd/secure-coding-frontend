@@ -1,3 +1,7 @@
+const BACKEND_PATH = "http://owasp-guidelines-good.com:8080/good-example";
+
 export const api = {
-  login: "http://owasp-guidelines-good.com:8080/good-example/auth/login"
+  login: `${BACKEND_PATH}/auth/login`,
+  productImage: (imageName: string) => `${BACKEND_PATH}/product/files/${imageName}`,
+  productDetails: (id: number) => `${BACKEND_PATH}/product/${id}`
 }

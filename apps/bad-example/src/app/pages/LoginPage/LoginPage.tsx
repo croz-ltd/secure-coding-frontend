@@ -3,9 +3,9 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import React from 'react';
-import './LoginPage.css';
 import ErrorComponent from "../../components/ErrorMessage/ErrorMessage";
 import { login } from "../../api/login";
+import { LoginPageStyles } from "@owasp-guidelines-frontend/shared-lib";
 
 const loginSchema = z.object({
   username: z.string().min(1, { message: 'Required' }),
@@ -29,20 +29,20 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page">
-      <form className="login-card" onSubmit={handleSubmit(onSubmit)}>
-        <h2>Login</h2>
-        <div className="input-group">
-          <label>Username:</label>
-          <input {...register('username')} />
+    <div className={LoginPageStyles.loginPage}>
+      <form className={LoginPageStyles.loginCard} onSubmit={handleSubmit(onSubmit)}>
+        <h2 className={LoginPageStyles.loginTitle}>Login</h2>
+        <div className={LoginPageStyles.inputGroup}>
+          <label className={LoginPageStyles.loginLabel}>Username:</label>
+          <input className={LoginPageStyles.loginInput} {...register('username')} />
           {errors.username && <ErrorComponent message="Username is required." />}
         </div>
-        <div className="input-group">
-          <label>Password:</label>
-          <input type="password" {...register('password')} />
+        <div className={LoginPageStyles.inputGroup}>
+          <label className={LoginPageStyles.loginLabel}>Password:</label>
+          <input className={LoginPageStyles.loginInput} type="password" {...register('password')} />
           {errors.password && <ErrorComponent message="Password is required." />}
         </div>
-        <button className="login-button" type="submit">
+        <button className={LoginPageStyles.loginButton} type="submit">
           Login
         </button>
       </form>

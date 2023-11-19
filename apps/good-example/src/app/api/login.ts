@@ -11,11 +11,9 @@ export async function login(username: string, password: string) {
     credentials: "include"
   });
 
-  // TODO: dodaj error handler - bbes
   if (response.status === 200) {
-    //TODO: pregledaj ovu navigaciju - bbes
-    window.location.href = 'http://owasp-guidelines-good.com';
+    return Promise.resolve()
   }
 
-  return Promise.resolve();
+  return Promise.reject();
 }

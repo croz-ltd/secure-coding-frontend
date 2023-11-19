@@ -1,0 +1,24 @@
+.comment {
+  border: 1px solid #ccc;
+  padding: 0.4rem;
+  max-width: 60rem;
+  margin-left: 2rem;
+  margin-top: 1rem;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentUser {
+  font-weight: bold;
+}
+
+.commentDate {
+  color: #555;
+}
+
+.commentText {
+  margin: 0;
+}

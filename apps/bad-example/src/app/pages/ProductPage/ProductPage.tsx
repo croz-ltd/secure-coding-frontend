@@ -1,5 +1,6 @@
 import React from 'react';
-import './ProductPage.css';
+
+import { ProductPageStyles } from "@owasp-guidelines-frontend/shared-lib";
 
 const ProductPage = () => {
   const product = {
@@ -15,19 +16,19 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="product-page">
-      <div className="product-image-container">
-        <img className="product-image" src={product.image} alt={product.name} />
+    <div className={ProductPageStyles.productPage}>
+      <div className={ProductPageStyles.productImageContainer}>
+        <img className={ProductPageStyles.productImage} src={product.image} alt={product.name} />
       </div>
-      <div className="product-details-container">
-        <h2 className="product-name">{product.name}</h2>
-        <p className="product-seller">{product.seller}</p>
-        <p className="product-price">{product.price}</p>
-        <button className="buy-button" onClick={handleBuyClick}>
+      <div className={ProductPageStyles.productDetailsContainer}>
+        <h2 className={ProductPageStyles.productName}>{product.name}</h2>
+        <p className={ProductPageStyles.productSeller}>{product.seller}</p>
+        <p className={ProductPageStyles.productPrice}>{product.price}</p>
+        <button className={ProductPageStyles.buyButton} onClick={handleBuyClick}>
           Buy Now
         </button>
-        <div className="product-description-container">
-          <p className="product-description">{product.description}</p>
+        <div className={ProductPageStyles.productDescriptionContainer}>
+          <p className={ProductPageStyles.productDescription}>{product.description}</p>
         </div>
       </div>
     </div>
