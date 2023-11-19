@@ -12,3 +12,11 @@ export type Comment = {
   text: string
   creationDate: string;
 };
+
+export type PasswordResetCommand = {
+  username: string,
+  password: string,
+  questionOneAnswer: string;
+  questionTwoAnswer: string;
+  questionThreeAnswer: string;
+};

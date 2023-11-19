@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
 import {HeaderStyles} from "@owasp-guidelines-frontend/shared-lib";
 import {ProductListPage} from "./pages/ProductListPage/ProductListPage";
+import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,10 @@ export function App() {
         <Route
           path="/home"
           element={<ProductListPage />}
+        />
+        <Route
+          path="/password-reset"
+          element={<PasswordResetPage />}
         />
       </Routes>
     </QueryClientProvider>
