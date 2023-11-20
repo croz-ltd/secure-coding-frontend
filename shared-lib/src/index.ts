@@ -5,6 +5,7 @@ import CommentStyles from "./lib/component/Comment.module.css";
 import ProductListStyles from "./lib/page/ProductListPage.module.css";
 import PasswordResetStyles from "./lib/page/PasswordResetPage.module.css";
 import CommentFormStyles from "./lib/component/CommentForm.module.css";
+import ProductFormStyles from "./lib/page/ProductFormPage.module.css";
 
 export {
   LoginPageStyles,
@@ -13,5 +14,6 @@ export {
   CommentStyles,
   ProductListStyles,
   PasswordResetStyles,
-  CommentFormStyles
+  CommentFormStyles,
+  ProductFormStyles
 }

@@ -1,0 +1,58 @@
+.newProductPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.newProductCard {
+  width: 50rem;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.newProductTitle {
+  text-align: center;
+}
+
+.newProductGroup {
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.newProductLabel {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.newProductInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.newProductTextArea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: 5rem;
+}
+
+.newProductButton {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.newProductButton:hover {
+  background-color: var(--primary-color-dark);
+}

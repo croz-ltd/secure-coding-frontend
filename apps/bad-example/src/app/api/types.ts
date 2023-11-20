@@ -25,6 +25,13 @@ export type CreateCommentCommand = {
   text: string;
 }
 
+export type CreateProductCommand = {
+  name: string;
+  image: FileList;
+  description: string;
+  price: number;
+};
+
 export type ValidationErrorsResponse<T> = {
   [key in keyof T]: string[];
 };
