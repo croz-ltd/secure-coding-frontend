@@ -8,6 +8,7 @@ import React from 'react';
 import ErrorComponent from "../../components/ErrorMessage/ErrorMessage";
 import { login } from "../../api/auth";
 import { LoginPageStyles } from "@owasp-guidelines-frontend/shared-lib";
+import {ValidationError} from "../../util/ValidationUtil";
 
 const loginSchema = z.object({
   username: z.string().min(1, { message: 'Required' }),
@@ -23,6 +24,7 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError
   } = useForm({
     resolver,
     defaultValues: {
@@ -37,7 +39,12 @@ const LoginPage = () => {
     login(data.username, data.password, data.rememberMe)
       .then(() => {
         navigate("/home");
-      });
+      }).catch((errors) => {
+        for (const err of errors) {
+          const error = (err as unknown) as ValidationError<z.infer<typeof loginSchema>>;
+          setError(error.field, error.error);
+        }
+    });
   };
 
   return (
@@ -47,12 +54,12 @@ const LoginPage = () => {
         <div className={LoginPageStyles.inputGroup}>
           <label className={LoginPageStyles.loginLabel}>Username:</label>
           <input className={LoginPageStyles.loginInput} {...register('username')} />
-          {errors.username && <ErrorComponent message="Username is required." />}
+          {errors.username && <ErrorComponent message={errors.username.message ?? ""} />}
         </div>
         <div className={LoginPageStyles.inputGroup}>
           <label className={LoginPageStyles.loginLabel}>Password:</label>
           <input className={LoginPageStyles.loginInput} type="password" {...register('password')} />
-          {errors.password && <ErrorComponent message="Password is required." />}
+          {errors.password && <ErrorComponent message={errors.password.message ?? ""} />}
         </div>
         <input type="checkbox" {...register('rememberMe')} style={{marginBottom: "1rem"}}/>
         <label>Remember me</label>

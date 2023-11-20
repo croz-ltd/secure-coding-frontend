@@ -20,3 +20,7 @@ export type PasswordResetCommand = {
   questionTwoAnswer: string;
   questionThreeAnswer: string;
 };
+
+export type ValidationErrorsResponse<T> = {
+  [key in keyof T]: string[];
+};

@@ -1,5 +1,6 @@
 import * as paths from "./paths";
 import {PasswordResetCommand} from "./types";
+import {mapValidationErrorResponse} from "../util/ValidationUtil";
 
 export async function login(username: string, password: string, rememberMe: boolean): Promise<void> {
   const response = await fetch(paths.api.login, {
@@ -20,7 +21,8 @@ export async function login(username: string, password: string, rememberMe: bool
     return Promise.resolve();
   }
 
-  return Promise.reject();
+  const errorBody = await response.json();
+  return Promise.reject(mapValidationErrorResponse(errorBody));
 }
 
 export async function passwordReset(passwordResetCommand: PasswordResetCommand): Promise<void> {
