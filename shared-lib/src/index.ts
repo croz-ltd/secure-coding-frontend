@@ -4,5 +4,14 @@ import HeaderStyles from "./lib/component/Header.module.css";
 import CommentStyles from "./lib/component/Comment.module.css";
 import ProductListStyles from "./lib/page/ProductListPage.module.css";
 import PasswordResetStyles from "./lib/page/PasswordResetPage.module.css";
+import CommentFormStyles from "./lib/component/CommentForm.module.css";
 
-export { LoginPageStyles, ProductPageStyles, HeaderStyles, CommentStyles, ProductListStyles, PasswordResetStyles }
+export {
+  LoginPageStyles,
+  ProductPageStyles,
+  HeaderStyles,
+  CommentStyles,
+  ProductListStyles,
+  PasswordResetStyles,
+  CommentFormStyles
+}

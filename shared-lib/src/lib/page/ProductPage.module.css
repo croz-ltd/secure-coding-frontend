@@ -65,3 +65,7 @@
   line-height: 1.5;
   white-space: pre-line;
 }
+
+.productComments {
+  margin-left: 1rem;
+}
