@@ -20,3 +20,8 @@ export type PasswordResetCommand = {
   questionTwoAnswer: string;
   questionThreeAnswer: string;
 };
+
+export type CreateCommentCommand = {
+  text: string;
+}
+

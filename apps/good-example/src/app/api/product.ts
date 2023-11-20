@@ -1,5 +1,6 @@
 import * as paths from "./paths";
-import { Product } from "./types";
+import {CreateCommentCommand, Product} from "./types";
+import {authFetch} from "../util/AuthUtil";
 
 export async function findOne(id: number): Promise<Product> {
   const response = await fetch(paths.api.productFindOne(id));
@@ -20,3 +21,19 @@ export async function findAll(): Promise<Product[]> {
 
   return Promise.reject();
 }
+
+export async function createComment(id: number, createCommentCommand: CreateCommentCommand): Promise<Comment> {
+  const response = await authFetch(paths.api.createComment(id), {
+    body: JSON.stringify(createCommentCommand),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    credentials: "include"
+  });
+
+  //TODO: ovdje ce jos ici validacija - bbes
+  return response.json();
+}
+
