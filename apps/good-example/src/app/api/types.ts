@@ -21,6 +21,13 @@ export type PasswordResetCommand = {
   questionThreeAnswer: string;
 };
 
+export type CreateProductCommand = {
+  name: string;
+  image: FileList;
+  description: string;
+  price: number;
+};
+
 export type CreateCommentCommand = {
   text: string;
 }
