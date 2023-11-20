@@ -22,6 +22,7 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError
   } = useForm({
     resolver
   });
@@ -31,8 +32,12 @@ const LoginPage = () => {
     login(data.username, data.password)
       .then(() => {
         navigate("/home");
-      });
+      }).catch((error) => {
+      setError("root.serverError", { type: "custom", message: error})
+    });
   };
+
+  console.log(errors);
 
   return (
     <div className={LoginPageStyles.loginPage}>
@@ -48,6 +53,7 @@ const LoginPage = () => {
           <input className={LoginPageStyles.loginInput} type="password" {...register('password')} />
           {errors.password && <ErrorComponent message="Password is required." />}
         </div>
+        {errors.root?.serverError && <ErrorComponent message={errors.root.serverError.message ?? ""} />}
         <button className={LoginPageStyles.loginButton} type="submit">
           Login
         </button>

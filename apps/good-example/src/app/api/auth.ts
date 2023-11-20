@@ -16,7 +16,11 @@ export async function login(username: string, password: string): Promise<void> {
     return Promise.resolve()
   }
 
-  return Promise.reject();
+  if (response.status === 401) {
+    return Promise.reject("Incorrect username or password. Please try again.")
+  }
+
+  return Promise.reject("Error");
 }
 
 export async function passwordReset(passwordResetCommand: PasswordResetCommand): Promise<void> {
