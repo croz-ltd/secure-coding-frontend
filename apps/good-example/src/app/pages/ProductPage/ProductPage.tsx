@@ -11,8 +11,6 @@ import {CommentForm} from "../../components/comment/CommentForm";
 
 const ProductPage = () => {
   const {id} = useParams();
-  // TODO: Ispravi seler - bbes
-  const seller = "Seller Name";
 
   const {data, isLoading, refetch} = useQuery({
     queryKey: ["product", id],
@@ -42,7 +40,7 @@ const ProductPage = () => {
           </div>
           <div className={ProductPageStyles.productDetailsContainer}>
             <h2 className={ProductPageStyles.productName}>{data.name}</h2>
-            <p className={ProductPageStyles.productSeller}>{seller}</p>
+            <p className={ProductPageStyles.productSeller}>{data.seller.username}</p>
             <p className={ProductPageStyles.productPrice}>{data.price + "€"}</p>
             <button className={ProductPageStyles.buyButton} onClick={handleBuyClick}>
               Buy Now

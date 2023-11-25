@@ -7,12 +7,10 @@ type CommentProps = {
 }
 
 export const CommentComponent = (props: CommentProps) => {
-  //TODO: Dodaj pravog korisnika - bbes
-  const commentUser = "commentUser";
   return (
     <div className={CommentStyles.comment}>
       <div className={CommentStyles.commentHeader}>
-        <span className={CommentStyles.commentUser}>{commentUser}</span>
+        <span className={CommentStyles.commentUser}>{props.comment.creator.username}</span>
         <span className={CommentStyles.commentDate}>{props.comment.creationDate}</span>
       </div>
       <p className={CommentStyles.commentText}>{props.comment.text}</p>

@@ -4,13 +4,15 @@ export type Product = {
   description: string;
   price: number;
   imageName: string;
-  comments: Comment[]
+  comments: Comment[];
+  seller: UserResponse;
 };
 
 export type Comment = {
   id: number;
   text: string
   creationDate: string;
+  creator: UserResponse;
 };
 
 export type PasswordResetCommand = {
@@ -31,4 +33,9 @@ export type CreateProductCommand = {
 export type CreateCommentCommand = {
   text: string;
 }
+
+export type UserResponse = {
+  id: number;
+  username: string;
+};
 
