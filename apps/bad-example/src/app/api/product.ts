@@ -1,5 +1,5 @@
 import * as paths from "./paths";
-import {CreateCommentCommand, CreateProductCommand, Product} from "./types";
+import {CreateCommentCommand, CreateOrderCommand, CreateProductCommand, OrderResponse, Product} from "./types";
 
 export async function findOne(id: number): Promise<Product> {
   const response = await fetch(paths.api.productFindOne(id));
@@ -46,6 +46,21 @@ export async function createProduct(createProductCommand: CreateProductCommand):
   const response = await fetch(paths.api.createProduct, {
     body: formData,
     method: "post",
+    credentials: "include"
+  });
+
+  //TODO: ovdje ce jos ici validacija - bbes
+  return response.json();
+}
+
+export async function createOrder(id: number, createOrderCommand: CreateOrderCommand): Promise<OrderResponse> {
+  const response = await fetch(paths.api.createOrder(id), {
+    body: JSON.stringify(createOrderCommand),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
     credentials: "include"
   });
 
