@@ -12,6 +12,7 @@ import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {useMutation} from "@tanstack/react-query";
+import ErrorComponent from "../../../../../bad-example/src/app/components/ErrorMessage/ErrorMessage";
 
 const placeOrderSchema = z.object({
   quantity: z.number().min(1, {message: 'Must be greater than 1'}),
@@ -23,7 +24,8 @@ const ProductPage = () => {
 
   const {
     register,
-    handleSubmit
+    handleSubmit,
+    formState: { errors }
   } = useForm({
     resolver,
     defaultValues: {
@@ -75,6 +77,7 @@ const ProductPage = () => {
                 })
               }/>
             </div>
+            {errors.quantity && <ErrorComponent message={errors.quantity.message ?? ""} />}
             <button className={ProductPageStyles.buyButton} type="submit">
               Buy Now
             </button>
