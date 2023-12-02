@@ -1,13 +1,18 @@
 import * as paths from "./paths";
 import {PasswordResetCommand} from "./types";
+import {authFetch, setCsrfToken} from "../util/AuthUtil";
 
 export async function login(username: string, password: string): Promise<void> {
-  const formData = new FormData();
-  formData.append('username', username);
-  formData.append('password', password);
-
-  const response = await fetch(paths.api.login, {
-    body: formData,
+  await getCsrfToken();
+  const response = await authFetch(paths.api.login, {
+    body: JSON.stringify({
+      username: username,
+      password: password
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     method: "post",
     credentials: "include"
   });
@@ -24,7 +29,7 @@ export async function login(username: string, password: string): Promise<void> {
 }
 
 export async function passwordReset(passwordResetCommand: PasswordResetCommand): Promise<void> {
-  const response = await fetch(paths.api.passwordReset, {
+  const response = await authFetch(paths.api.passwordReset, {
     body: JSON.stringify(passwordResetCommand),
     headers: {
       'Accept': 'application/json',
@@ -38,4 +43,15 @@ export async function passwordReset(passwordResetCommand: PasswordResetCommand):
   }
 
   return Promise.reject();
+}
+
+export async function getCsrfToken(): Promise<void> {
+  const response = await fetch(paths.api.csrfToken);
+
+  if (response.status !== 200) {
+    return Promise.resolve();
+  }
+
+  const responseBody = await response.json() as { token: string };
+  setCsrfToken(responseBody.token);
 }

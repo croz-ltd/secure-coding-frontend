@@ -24,10 +24,13 @@ const LoginPage = () => {
     formState: { errors },
     setError
   } = useForm({
-    resolver
+    resolver,
+    defaultValues: {
+      username: "",
+      password: ""
+    }
   });
 
-  /* eslint-disable */
   const onSubmit = (data: any) => {
     login(data.username, data.password)
       .then(() => {
@@ -36,8 +39,6 @@ const LoginPage = () => {
       setError("root.serverError", { type: "custom", message: error})
     });
   };
-
-  console.log(errors);
 
   return (
     <div className={LoginPageStyles.loginPage}>

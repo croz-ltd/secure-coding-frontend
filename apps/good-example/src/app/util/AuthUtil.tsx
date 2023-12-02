@@ -1,10 +1,12 @@
+const CSRF_TOKEN_NAME = "X-CSRF-TOKEN";
+
 export const authFetch = (input: RequestInfo | URL, init?: RequestInit) => {
   if (!init || init.method === "get") {
     return fetch(input, init);
   }
 
   const headers = new Headers(init?.headers);
-  headers.set("XSRF-TOKEN", getCookieValue("XSRF-TOKEN") ?? "")
+  headers.set(CSRF_TOKEN_NAME, getCsrfToken())
 
   return fetch(input, {
     ...init,
@@ -13,11 +15,10 @@ export const authFetch = (input: RequestInfo | URL, init?: RequestInit) => {
   })
 }
 
+export const setCsrfToken = (token: string) => {
+  localStorage.setItem(CSRF_TOKEN_NAME, token);
+}
 
-const getCookieValue = (name: string): string | undefined => {
-  const regex = new RegExp(`(^| )${name}=([^;]+)`)
-  const match = document.cookie.match(regex)
-  if (match) {
-    return match[2]
-  }
+export const getCsrfToken = (): string => {
+  return localStorage.getItem(CSRF_TOKEN_NAME) ?? "";
 }
