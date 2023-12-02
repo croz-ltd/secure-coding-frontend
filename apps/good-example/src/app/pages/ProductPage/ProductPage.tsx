@@ -5,21 +5,42 @@ import {useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import * as productApi from "../../api/product";
 import * as paths from "../../api/paths";
-import { Comment as CommentType} from "../../api/types";
+import {Comment as CommentType, CreateOrderCommand} from "../../api/types";
 import {CommentComponent} from "../../components/comment/Comment";
 import {CommentForm} from "../../components/comment/CommentForm";
+import * as z from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useForm} from "react-hook-form";
+import {useMutation} from "@tanstack/react-query";
+
+const placeOrderSchema = z.object({
+  quantity: z.number().min(1, {message: 'Must be greater than 1'}),
+});
 
 const ProductPage = () => {
   const {id} = useParams();
+  const resolver = zodResolver(placeOrderSchema);
+
+  const {
+    register,
+    handleSubmit
+  } = useForm({
+    resolver,
+    defaultValues: {
+      quantity: null
+    }
+  });
+
+  const mutation = useMutation({
+    mutationFn: (createOrderCommand: CreateOrderCommand) => {
+      return productApi.createOrder(Number(id), createOrderCommand);
+    }
+  });
 
   const {data, isLoading, refetch} = useQuery({
     queryKey: ["product", id],
     queryFn: () => productApi.findOne(Number(id))
   });
-
-  const handleBuyClick = () => {
-    console.log('Buy button clicked');
-  };
 
   const sortByDate = (comments: CommentType[]): CommentType[] => {
     return comments.sort((a, b) => {
@@ -31,6 +52,10 @@ const ProductPage = () => {
     return (<h1>...Loading</h1>);
   }
 
+  const onSubmit = (data: any) => {
+    mutation.mutate(data);
+  }
+
   if (data) {
     return (
       <>
@@ -38,17 +63,25 @@ const ProductPage = () => {
           <div className={ProductPageStyles.productImageContainer}>
             <img className={ProductPageStyles.productImage} src={paths.api.productImage(data.imageName)} alt={data.name}/>
           </div>
-          <div className={ProductPageStyles.productDetailsContainer}>
+          <form className={ProductPageStyles.productDetailsContainer} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={ProductPageStyles.productName}>{data.name}</h2>
             <p className={ProductPageStyles.productSeller}>{data.seller.username}</p>
             <p className={ProductPageStyles.productPrice}>{data.price + "€"}</p>
-            <button className={ProductPageStyles.buyButton} onClick={handleBuyClick}>
+            <div className={ProductPageStyles.quantityContainer}>
+              <label htmlFor="quantity">Quantity:</label>
+              <input type="number" className={ProductPageStyles.quantityInput} {
+                ...register('quantity', {
+                  setValueAs: (value) => Number(value)
+                })
+              }/>
+            </div>
+            <button className={ProductPageStyles.buyButton} type="submit">
               Buy Now
             </button>
             <div className={ProductPageStyles.productDescriptionContainer}>
               <p className={ProductPageStyles.productDescription}>{data.description}</p>
             </div>
-          </div>
+          </form>
         </div>
         <CommentForm id={Number(id)} onSubmit={refetch}/>
         <div className={ProductPageStyles.productComments}>

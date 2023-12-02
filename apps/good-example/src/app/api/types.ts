@@ -39,3 +39,14 @@ export type UserResponse = {
   username: string;
 };
 
+export type CreateOrderCommand = {
+  quantity: number;
+};
+
+export type OrderResponse = {
+  id: number;
+  quantity: number;
+  product: Product;
+  buyer: UserResponse;
+}
+

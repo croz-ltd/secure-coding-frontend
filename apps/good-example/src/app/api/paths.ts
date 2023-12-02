@@ -7,5 +7,6 @@ export const api = {
   createProduct: `${BACKEND_PATH}/product/`,
   productImage: (imageName: string) => `${BACKEND_PATH}/product/files/${imageName}`,
   productFindOne: (id: number) => `${BACKEND_PATH}/product/${id}`,
-  productFindAll: `${BACKEND_PATH}/product/`
+  productFindAll: `${BACKEND_PATH}/product/`,
+  createOrder: (id: number) => `${BACKEND_PATH}/product/${id}/order`
 }
