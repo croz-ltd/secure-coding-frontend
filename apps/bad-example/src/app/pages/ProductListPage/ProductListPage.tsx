@@ -6,8 +6,6 @@ import {useNavigate} from "react-router-dom";
 import {ProductListStyles} from "@owasp-guidelines-frontend/shared-lib";
 
 export const ProductListPage = () => {
-  // TODO: Ispravi seler - bbes
-  const seller = "Seller Name";
   const navigate = useNavigate();
 
   const {data, isLoading} = useQuery({
@@ -27,7 +25,7 @@ export const ProductListPage = () => {
             <img src={paths.api.productImage(product.imageName)} alt={product.name} className={ProductListStyles.productListImage}/>
             <div className={ProductListStyles.productListInfo}>
               <h3 className={ProductListStyles.productListName}>{product.name}</h3>
-              <p className={ProductListStyles.productListPriceAndSeller}>{`Sold by: ${seller}`}</p>
+              <p className={ProductListStyles.productListPriceAndSeller}>{`Sold by: ${product.seller.username}`}</p>
               <p className={ProductListStyles.productListPriceAndSeller}>{`Price: €${product.price}`}</p>
             </div>
           </div>
