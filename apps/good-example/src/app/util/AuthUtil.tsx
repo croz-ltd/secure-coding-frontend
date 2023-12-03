@@ -1,4 +1,4 @@
-const CSRF_TOKEN_NAME = "X-CSRF-TOKEN";
+export const CSRF_TOKEN_NAME = "X-CSRF-TOKEN";
 
 export const authFetch = (input: RequestInfo | URL, init?: RequestInit) => {
   if (!init || init.method === "get") {

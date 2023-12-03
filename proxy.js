@@ -1,37 +1,46 @@
-const express = require('express');
-const proxy = require('express-http-proxy');
+const http = require('http');
+const httpProxy = require('http-proxy');
+const proxy = httpProxy.createProxyServer({ ws: true })
+  .on("error", (e) => {
+    console.log(e);
+  });
 
-const app = express();
-
-app.use((req, res, next) => {
+const server = http.createServer(function(req, res) {
   const host = req.headers.host;
-  const path = req.path;
+  const path = req.url;
 
   if (host === 'owasp-guidelines-good.com') {
     if (path.startsWith("/good-example")) {
-      return proxy('owasp-guidelines-good.com:8080', {
-        proxyReqPathResolver: (req) => req.url,
-      })(req, res, next);
+      proxy.web(req, res, { target: 'http://owasp-guidelines-good.com:8080' });
+    } else {
+      proxy.web(req, res, { target: 'http://owasp-guidelines-good.com:4201' });
     }
-    return proxy('127.0.0.1:4201', {
-      proxyReqPathResolver: (req) => req.url,
-    })(req, res, next);
   } else if (host === 'owasp-guidelines-bad.com') {
     if (path.startsWith("/bad-example")) {
-      return proxy('owasp-guidelines-bad.com:8081', {
-        proxyReqPathResolver: (req) => req.url,
-      })(req, res, next);
+      proxy.web(req, res, { target: 'http://owasp-guidelines-bad.com:8081' });
+    } else if (!path.startsWith("/bad-example-stomp")) {
+      proxy.web(req, res, { target: 'http://owasp-guidelines-bad.com:4200' });
     }
-    return proxy('127.0.0.1:4200', {
-      proxyReqPathResolver: (req) => req.url,
-    })(req, res, next);
+  } else {
+    res.status(404).send('Not Found');
   }
-
-  res.status(404).send('Not Found');
 });
 
+server.on('upgrade', function (req, socket, head) {
+  const host = req.headers.host;
 
-const PORT = 80;
-app.listen(PORT, () => {
-  console.log(`Proxy server is running on port ${PORT}`);
+  if (host === 'owasp-guidelines-good.com') {
+    proxy.ws(req, socket, head, {
+      target: 'ws://owasp-guidelines-good.com:8080',
+      ws: true
+    });
+  } else {
+    proxy.ws(req, socket, head, {
+      target: 'ws://owasp-guidelines-bad.com:8081',
+      ws: true
+    });
+  }
 });
+
+console.log("listening on port 80")
+server.listen(80);

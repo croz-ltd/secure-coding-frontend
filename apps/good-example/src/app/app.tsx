@@ -6,6 +6,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ProductListPage} from "./pages/ProductListPage/ProductListPage";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import ProductFormPage from "./pages/ProductFormPage/ProductFormPage";
+import {Toaster} from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -13,7 +14,8 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <header className={HeaderStyles.header}>WebShop</header>
-      <Routes>
+      <Toaster />
+        <Routes>
         <Route
           path="/product/new"
           element={<ProductFormPage />}

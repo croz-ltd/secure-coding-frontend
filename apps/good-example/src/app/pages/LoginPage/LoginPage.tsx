@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 import React from 'react';
 import ErrorComponent from "../../components/ErrorMessage/ErrorMessage";
-import { login } from "../../api/auth";
+import {getCurrentUser, login} from "../../api/auth";
 import { LoginPageStyles } from "@owasp-guidelines-frontend/shared-lib";
+import {createWebSocketClient} from "../../websocket/WebsocketClient";
 
 const loginSchema = z.object({
   username: z.string().min(1, { message: 'Required' }),
@@ -33,9 +34,10 @@ const LoginPage = () => {
 
   const onSubmit = (data: any) => {
     login(data.username, data.password)
-      .then(() => {
-        navigate("/home");
-      }).catch((error) => {
+      .then(() => getCurrentUser())
+      .then((user) => createWebSocketClient(user.id))
+      .then(() => navigate("/home"))
+      .catch((error) => {
       setError("root.serverError", { type: "custom", message: error})
     });
   };
