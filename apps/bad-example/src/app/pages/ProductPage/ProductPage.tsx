@@ -12,6 +12,7 @@ import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import ErrorComponent from "../../components/ErrorMessage/ErrorMessage";
+import toast from "react-hot-toast";
 
 const placeOrderSchema = z.object({
   quantity: z.number(),
@@ -35,7 +36,9 @@ const ProductPage = () => {
   const mutation = useMutation({
     mutationFn: (createOrderCommand: CreateOrderCommand) => {
       return productApi.createOrder(Number(id), createOrderCommand);
-    }
+    },
+    onSuccess: () => toast.success("Success"),
+    onError: () => toast.error("Failed")
   });
 
   const {data, isLoading, refetch} = useQuery({
