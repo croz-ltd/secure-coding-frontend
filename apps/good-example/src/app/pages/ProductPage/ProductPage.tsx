@@ -12,7 +12,8 @@ import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {useMutation} from "@tanstack/react-query";
-import ErrorComponent from "../../../../../bad-example/src/app/components/ErrorMessage/ErrorMessage";
+import ErrorComponent from "../../components/ErrorMessage/ErrorMessage";
+import toast from "react-hot-toast";
 
 const placeOrderSchema = z.object({
   quantity: z.number().min(1, {message: 'Must be greater than 1'}),
@@ -36,7 +37,9 @@ const ProductPage = () => {
   const mutation = useMutation({
     mutationFn: (createOrderCommand: CreateOrderCommand) => {
       return productApi.createOrder(Number(id), createOrderCommand);
-    }
+    },
+    onSuccess: () => toast.success("Success"),
+    onError: () => toast.error("Failed")
   });
 
   const {data, isLoading, refetch} = useQuery({
