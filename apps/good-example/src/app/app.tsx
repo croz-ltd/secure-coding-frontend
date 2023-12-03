@@ -24,6 +24,9 @@ export function App() {
           <div className={HeaderStyles.divider}/>
           {!location.pathname.includes("/home") && (
               <p><Link to="/home">home</Link></p>)}
+          <div className={HeaderStyles.divider}/>
+          {location.pathname.includes("/login") && (
+            <p><Link to="/password-reset">Reset password</Link></p>)}
           <p className={HeaderStyles.center}>WebShop</p>
         </div>
       </header>
