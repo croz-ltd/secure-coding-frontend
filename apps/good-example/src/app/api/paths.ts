@@ -7,7 +7,7 @@ export const api = {
   passwordReset: `${BACKEND_PATH}/auth/password-reset`,
   csrfToken: `${BACKEND_PATH}/auth/csrf`,
   createComment: (id: number) => `${BACKEND_PATH}/product/${id}/comment`,
-  createProduct: `${BACKEND_PATH}/product/`,
+  createProduct: `${BACKEND_PATH}/product`,
   productImage: (imageName: string) => `${BACKEND_PATH}/product/files/${imageName}`,
   productFindOne: (id: number) => `${BACKEND_PATH}/product/${id}`,
   productFindAll: `${BACKEND_PATH}/product/`,

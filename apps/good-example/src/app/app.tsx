@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Link, Route, Routes, useLocation} from 'react-router-dom';
 import ProductPage from "./pages/ProductPage/ProductPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import {HeaderStyles} from "@owasp-guidelines-frontend/shared-lib";
@@ -11,14 +11,27 @@ import {Toaster} from "react-hot-toast";
 const queryClient = new QueryClient();
 
 export function App() {
+  const location = useLocation();
+
   return (
     <QueryClientProvider client={queryClient}>
-      <header className={HeaderStyles.header}>WebShop</header>
-      <Toaster />
-        <Routes>
+      <header className={HeaderStyles.header}>
+        <div className={HeaderStyles.left}>
+          {!location.pathname.includes("/product/new") && (
+            <Link to="/product/new">
+            <p>Create product</p>
+          </Link>)}
+          <div className={HeaderStyles.divider}/>
+          {!location.pathname.includes("/home") && (
+              <p><Link to="/home">home</Link></p>)}
+          <p className={HeaderStyles.center}>WebShop</p>
+        </div>
+      </header>
+      <Toaster/>
+      <Routes>
         <Route
           path="/product/new"
-          element={<ProductFormPage />}
+          element={<ProductFormPage/>}
         />
         <Route
           path="/product/:id"
@@ -30,11 +43,11 @@ export function App() {
         />
         <Route
           path="/home"
-          element={<ProductListPage />}
+          element={<ProductListPage/>}
         />
         <Route
           path="/password-reset"
-          element={<PasswordResetPage />}
+          element={<PasswordResetPage/>}
         />
       </Routes>
     </QueryClientProvider>
