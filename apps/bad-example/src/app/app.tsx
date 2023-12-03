@@ -6,6 +6,7 @@ import {HeaderStyles} from "@owasp-guidelines-frontend/shared-lib";
 import {ProductListPage} from "./pages/ProductListPage/ProductListPage";
 import PasswordResetPage from "./pages/PasswordResetPage/PasswordResetPage";
 import ProductFormPage from "./pages/ProductFormPage/ProductFormPage";
+import {Toaster} from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -13,6 +14,7 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <header className={HeaderStyles.header}>WebShop</header>
+      <Toaster />
       <Routes>
         <Route
           path="/product/new"

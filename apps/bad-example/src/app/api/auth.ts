@@ -1,5 +1,5 @@
 import * as paths from "./paths";
-import {PasswordResetCommand} from "./types";
+import {PasswordResetCommand, UserResponse} from "./types";
 import {mapValidationErrorResponse} from "../util/ValidationUtil";
 
 export async function login(username: string, password: string, rememberMe: boolean): Promise<void> {
@@ -37,6 +37,16 @@ export async function passwordReset(passwordResetCommand: PasswordResetCommand):
 
   if (response.status === 200) {
     return Promise.resolve();
+  }
+
+  return Promise.reject();
+}
+
+export async function getCurrentUser(): Promise<UserResponse> {
+  const response = await fetch(paths.api.currentUser);
+
+  if (response.status === 200) {
+    return response.json();
   }
 
   return Promise.reject();
