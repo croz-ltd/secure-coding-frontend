@@ -60,7 +60,7 @@ const LoginPage = () => {
         </div>
         <div className={LoginPageStyles.inputGroup}>
           <label className={LoginPageStyles.loginLabel}>Password:</label>
-          <input className={LoginPageStyles.loginInput} type="password" {...register('password')} />
+          <input className={LoginPageStyles.loginInput} {...register('password')} />
           {errors.password && <ErrorComponent message={errors.password.message ?? ""}/>}
         </div>
         <input type="checkbox" {...register('rememberMe')} style={{marginBottom: "1rem"}}/>
