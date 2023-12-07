@@ -9,17 +9,17 @@ const server = http.createServer(function(req, res) {
   const host = req.headers.host;
   const path = req.url;
 
-  if (host === 'owasp-guidelines-good.com') {
+  if (host === 'owasp-guidelines-good.m8c.io') {
     if (path.startsWith("/good-example")) {
-      proxy.web(req, res, { target: 'http://owasp-guidelines-good.com:8080' });
+      proxy.web(req, res, { target: 'http://owasp-guidelines-good.m8c.io:8080' });
     } else {
-      proxy.web(req, res, { target: 'http://owasp-guidelines-good.com:4201' });
+      proxy.web(req, res, { target: 'http://owasp-guidelines-good.m8c.io:4201' });
     }
-  } else if (host === 'owasp-guidelines-bad.com') {
+  } else if (host === 'owasp-guidelines-bad.m8c.io') {
     if (path.startsWith("/bad-example")) {
-      proxy.web(req, res, { target: 'http://owasp-guidelines-bad.com:8081' });
+      proxy.web(req, res, { target: 'http://owasp-guidelines-bad.m8c.io:8081' });
     } else if (!path.startsWith("/bad-example-stomp")) {
-      proxy.web(req, res, { target: 'http://owasp-guidelines-bad.com:4200' });
+      proxy.web(req, res, { target: 'http://owasp-guidelines-bad.m8c.io:4200' });
     }
   } else {
     res.status(404).send('Not Found');
@@ -29,14 +29,14 @@ const server = http.createServer(function(req, res) {
 server.on('upgrade', function (req, socket, head) {
   const host = req.headers.host;
 
-  if (host === 'owasp-guidelines-good.com') {
+  if (host === 'owasp-guidelines-good.m8c.io') {
     proxy.ws(req, socket, head, {
-      target: 'ws://owasp-guidelines-good.com:8080',
+      target: 'ws://owasp-guidelines-good.m8c.io:8080',
       ws: true
     });
   } else {
     proxy.ws(req, socket, head, {
-      target: 'ws://owasp-guidelines-bad.com:8081',
+      target: 'ws://owasp-guidelines-bad.m8c.io:8081',
       ws: true
     });
   }

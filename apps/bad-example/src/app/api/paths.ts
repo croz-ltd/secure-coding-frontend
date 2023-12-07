@@ -1,5 +1,5 @@
-const BACKEND_PATH = "http://owasp-guidelines-bad.com/bad-example";
-const BACKEND_PATH_WS = "ws://owasp-guidelines-bad.com/bad-example";
+const BACKEND_PATH = "http://owasp-guidelines-bad.m8c.io/bad-example";
+const BACKEND_PATH_WS = "ws://owasp-guidelines-bad.m8c.io/bad-example";
 
 export const api = {
   login: `${BACKEND_PATH}/auth/login`,
