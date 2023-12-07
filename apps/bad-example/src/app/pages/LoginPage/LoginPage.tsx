@@ -60,6 +60,7 @@ const LoginPage = () => {
         </div>
         <div className={LoginPageStyles.inputGroup}>
           <label className={LoginPageStyles.loginLabel}>Password:</label>
+          { /* OWASP[40] */ }
           <input className={LoginPageStyles.loginInput} {...register('password')} />
           {errors.password && <ErrorComponent message={errors.password.message ?? ""}/>}
         </div>
