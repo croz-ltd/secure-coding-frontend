@@ -11,6 +11,6 @@ export const api = {
   productFindOne: (id: number) => `${BACKEND_PATH}/product/${id}`,
   productFindAll: `${BACKEND_PATH}/product/`,
   createOrder: (id: number) => `${BACKEND_PATH}/product/${id}/order`,
-  websocket: `${BACKEND_PATH_WS}/good-example-stomp`,
+  websocket: `${BACKEND_PATH_WS}/bad-example-stomp`,
   stompTopic: (id: number) => `/product/${id}`
 }
