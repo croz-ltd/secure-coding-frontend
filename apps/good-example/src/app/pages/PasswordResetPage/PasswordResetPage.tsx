@@ -68,17 +68,17 @@ const PasswordResetPage = () => {
           {errors.username && <ErrorComponent message="Required" />}
         </div>
         <div className={PasswordResetStyles.passwordResetInputGroup}>
-          <label className={PasswordResetStyles.passwordResetLabel}>In what city were you born?</label>
+          <label className={PasswordResetStyles.passwordResetLabel}>What was the first exam you failed?</label>
           <input className={PasswordResetStyles.passwordResetInput} {...register('questionOneAnswer')}/>
           {errors.username && <ErrorComponent message="Required" />}
         </div>
         <div className={PasswordResetStyles.passwordResetInputGroup}>
-          <label className={PasswordResetStyles.passwordResetLabel}>What high school did you attend?</label>
+          <label className={PasswordResetStyles.passwordResetLabel}>What was the name of your first stuffed animal?</label>
           <input className={PasswordResetStyles.passwordResetInput} {...register('questionTwoAnswer')}/>
           {errors.username && <ErrorComponent message="Required" />}
         </div>
         <div className={PasswordResetStyles.passwordResetInputGroup}>
-          <label className={PasswordResetStyles.passwordResetLabel}>Where did you meet your spouse?</label>
+          <label className={PasswordResetStyles.passwordResetLabel}>Where were you when you had your first kiss?</label>
           <input className={PasswordResetStyles.passwordResetInput} {...register('questionThreeAnswer')}/>
           {errors.username && <ErrorComponent message="Required" />}
         </div>
